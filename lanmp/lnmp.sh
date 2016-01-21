@@ -489,6 +489,7 @@ function install_Menu(){
 			exit 0
 			;;
 		*)
+            clear
 			echo -e "\033[47;31m Options is not found \033[0m"
 			;;
 	esac
