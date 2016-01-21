@@ -490,7 +490,7 @@ function install_Menu(){
 			;;
 		*)
 			echo "Options is not found,Please run the script view"
-			exit 1
+			print_Memu
 			;;
 	esac
 }
