@@ -489,8 +489,7 @@ function install_Menu(){
 			exit 0
 			;;
 		*)
-			echo "Options is not found,Please run the script view"
-			print_Memu
+			echo -e "\033[47;31m Options is not found \033[0m"
 			;;
 	esac
 }
