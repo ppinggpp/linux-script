@@ -68,10 +68,8 @@ function check_Make(){
 ######~~~~~~~~~~~~~~~~~~~系统初始化函数部分~~~~~~~~~~~~~~~~~~~
 #系统环境初始化函数 - 系统环境初始化通用
 function init_System(){
-    #安装基础库
-    yum install lsof bc nc wget gcc* gcc-c++* autoconf automake gd gd-devel openssh openssh-clients openssl openssl-devel zlib \
-    zlib-devel sysstat make unzip zip pciutils perl-XML-Dumper lrzsz ntp ntpdate vim python-setuptools libevent-devel mysql-devel \
-	ncurses ncurses-devel pcre pcre-devel popt-devel -y >/dev/null
+
+
 
 	#清空防火墙,并关闭
 	/sbin/iptables -F
@@ -244,7 +242,7 @@ function install_Redis(){
         exit 4
     fi
     mkdir -p $Install_dir/redis/{bin,conf,data}
-    cp redis.conf $Install_dir/redis/conf/ && cp src{redis-benchmark,mkreleasehdr.sh,redis-cli,redis-server,redis-sentinel,redis-check-aof,redis-check-dump} $Install_dir/redis/bin/
+    cp redis.conf $Install_dir/redis/conf/ && cp src/{redis-benchmark,mkreleasehdr.sh,redis-cli,redis-server,redis-sentinel,redis-check-aof,redis-check-dump} $Install_dir/redis/bin/
     if [ $? -ne 0 ];then
         echo -e "\033[47;31m redis file or dir is not exist! \033[0m"
         exit 2
@@ -368,7 +366,7 @@ function install_Nginx(){
 	--with-http_flv_module \
 	--with-http_gzip_static_module \
 	--with-http_stub_status_module \
-	--with-http_realip_module >/dev/null
+	--with-http_realip_module
 
 	check_Configure
 
@@ -505,6 +503,9 @@ function Main(){
 		mkdir -p $Install_dir
 	fi
 
+    yum install lsof bc nc wget gcc* gcc-c++* autoconf automake gd gd-devel openssh openssh-clients openssl openssl-devel zlib \
+    zlib-devel sysstat make unzip zip pciutils perl-XML-Dumper lrzsz ntp ntpdate vim python-setuptools libevent-devel mysql-devel \
+	ncurses ncurses-devel pcre pcre-devel popt-devel -y 
 	clear
 
 	if [ -$# -lt 1 ];then
