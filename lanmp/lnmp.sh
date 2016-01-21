@@ -244,7 +244,7 @@ function install_Redis(){
         exit 4
     fi
     mkdir -p $Install_dir/redis/{bin,conf,data}
-    cp redis.conf $Install_dir/redis/conf/ && cp redis-benchmark mkreleasehdr.sh redis-cli redis-server redis-sentinel redis-check-aof redis-check-dump $Install_dir/redis/bin/
+    cp redis.conf $Install_dir/redis/conf/ && cp src{redis-benchmark,mkreleasehdr.sh,redis-cli,redis-server,redis-sentinel,redis-check-aof,redis-check-dump} $Install_dir/redis/bin/
     if [ $? -ne 0 ];then
         echo -e "\033[47;31m redis file or dir is not exist! \033[0m"
         exit 2
