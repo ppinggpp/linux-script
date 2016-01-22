@@ -250,6 +250,7 @@ function install_Redis(){
         echo -e "\033[42;37m redis install successful  \033[0m"
 	fi
 }
+
 #安装mysql
 function install_Mysql(){
 	#依赖关系检查
@@ -303,6 +304,7 @@ function install_Mysql(){
 	ln -sf $Install_dir/mysql /usr/local/mysql
 	echo -e "\033[42;37m Mysql install successful  \033[0m"
 }
+
 #php安装函数
 function install_PHP(){
 	#依赖关系检查
@@ -351,6 +353,7 @@ function install_PHP(){
 
 	ln -sf $Install_dir/php /usr/local/php
 }
+
 function install_Nginx(){
 	useradd www -s /sbin/nologin >/dev/null 2>/dev/null
 
@@ -492,6 +495,7 @@ function install_Menu(){
 			;;
 	esac
 }
+
 #函数入口
 function Main(){
     Download_dir=/data/soft
@@ -523,4 +527,5 @@ function Main(){
 	fi
 
 }
+
 Main $*
