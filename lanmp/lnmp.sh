@@ -497,7 +497,7 @@ function install_Menu(){
 }
 
 #函数入口
-function Main(){
+function main(){
     Download_dir=/data/soft
 	if [ ! -d $Download_dir ];then
 		mkdir -p $Download_dir
@@ -509,10 +509,11 @@ function Main(){
 
     yum install lsof bc nc wget gcc* gcc-c++* autoconf automake gd gd-devel openssh openssh-clients openssl openssl-devel zlib \
     zlib-devel sysstat make unzip zip pciutils perl-XML-Dumper lrzsz ntp ntpdate vim python-setuptools libevent-devel mysql-devel \
-	ncurses ncurses-devel pcre pcre-devel popt-devel -y 
+	ncurses ncurses-devel pcre pcre-devel popt-devel -y
 	clear
 
-	if [ -$# -lt 1 ];then
+#########可修改成自动安装部分###########
+	if [ $# -lt 1 ];then
 		while true;do
 			#clear
 			print_Memu
@@ -522,10 +523,10 @@ function Main(){
 			read NUM
 			install_Menu $NUM
 		done
-	elif [ -$# -eq 1 ];then
+	elif [ $# -eq 1 ];then
 		install_Menu $1
 	fi
-
+#####################################
 }
 
-Main $*
+main $*
