@@ -16,7 +16,7 @@ function install_Rsync(){
 }
 
 function create_Rsync_Conf(){
-	cat  > /etc/rsyncd.conf<<EOF
+	cat >/etc/rsyncd.conf<<eof
 uid=nobody
 gid=nobody
 use chroot=no
@@ -31,40 +31,37 @@ comment=SHENG file
 ignore errors
 read only=no
 write only=no
-hosts allow=xxx.xxx.xxx.xxx
-hosts deny=*
+hosts allow=192.168.1.113
+hosts deny=192.168.1.3
 auth users=test
 secrets file=/etc/rsyncd.pass
-EOF
+eof
 }
 
 function create_Rsyncd_Command(){
-    cat >/etc/init.d/rsyncd<<EOF
+    cat > /etc/init.d/rsyncd <<eof
 #!/bin/bash
-Rsync_Command=`whereis rsync | awk '{print $2}'`
+Rsync_Command=\`whereis rsync | awk '{print \$2}'\`
 function Start()
 {
-    ${Rsync_Command} --daemon
-    if [ $? -eq 0 ]
-        then
-            echo -e "\033[1;32m  The rsyncd start successful...... \033[0m"
-        else
-            echo -e "\033[31m \033[05m The rsyncd start fail !!!!!!!! \033[0m"
+    \${Rsync_Command} --daemon
+    if [ $? -eq 0 ];then
+        echo -e "\033[1;32m  The rsyncd start successful...... \033[0m"
+    else
+        echo -e "\033[31m \033[05m The rsyncd start fail !!!!!!!! \033[0m"
     fi
 }
 function Stop()
 {
-    if [ -f '/var/run/rsyncd.pid' ]
-        then
-            kill -9 `cat /var/run/rsyncd.pid`
+    if [ -f '/var/run/rsyncd.pid' ];then
+            kill -9 \`cat /var/run/rsyncd.pid\`
             sleep 1
-            proce_num=`ps -ef | grep ${Rsync_Command} | grep -v grep | wc -l`
-            if [ ${proce_num} -gt 0 ]
-                then
-                    echo -e "\033[31m \033[05m The rsyncd Stop fail !!!!!!!! \033[0m"
-                else
-                    echo -e "\033[1;32m  The rsyncd Stop successful...... \033[0m"
-                    rm /var/run/rsyncd.pid
+            proce_num=\`ps -ef | grep \${Rsync_Command} | grep -v grep | wc -l\`
+            if [ \${proce_num} -gt 0 ];then
+                echo -e "\033[31m \033[05m The rsyncd Stop fail !!!!!!!! \033[0m"
+            else
+                echo -e "\033[1;32m  The rsyncd Stop successful...... \033[0m"
+                rm /var/run/rsyncd.pid
             fi
     else
         echo -e "\033[31m \033[05m  The /var/run/rsyncd.pid file is not exist! Check rsync is Runing ??? \033[0m"
@@ -77,7 +74,7 @@ function Restart()
     sleep 2
     Start
 }
-case $1 in
+case \$1 in
     start)
         Start
         ;;
@@ -91,8 +88,8 @@ case $1 in
         echo -e "\033[31m \033[05m Use start|stop|restart \033[0m"
         ;;
 esac
-EOF
-chown 755 /etc/init.d/rsyncd
+eof
+    chmod 755 /etc/init.d/rsyncd
 }
 
 function main(){
@@ -109,7 +106,7 @@ function main(){
     which rsync
     if [ $? -eq 0 ];then
     	echo  -e "\033[1;32m \033[05m The rsync is Exist! \033[0m"
-    	Create_Rsync_Conf
+    	create_Rsync_Conf
     	echo -e "\033[1;32m The configure file is /etc/rsyncd.conf \033[0m"
         create_Rsyncd_Command
 
@@ -117,7 +114,9 @@ function main(){
     	echo -e "\033[1;32m Setup rsync \033[0m"
     	Install_Rsync
     	echo -e "\033[1;32m Create config file \033[0m"
-    	Create_Rsync_Conf
+    	create_Rsync_Conf
         create_Rsyncd_Command
     fi
 }
+
+main $*
