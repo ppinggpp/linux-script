@@ -70,6 +70,7 @@ function check_Make_Install(){
         echo -e "\033[42;37m $(basename `pwd`)  make install successful  \033[0m"
     fi
 }
+
 function zabbix_Agentd_Seting(){
     #zabbix日志目录 和外部脚本
     mkdir /data/local/zabbix/{log,scripts}
@@ -89,6 +90,7 @@ function zabbix_Agentd_Seting(){
         sed -i "s/^ServerActive=.*$/ServerActive=${Server_host_ip}/g" /data/local/zabbix/etc/zabbix_agentd.conf
     fi
 }
+
 function zabbix_Install(){
     groupadd zabbix 2>/dev/null
     useradd -M -s /sbin/nologin -g zabbix zabbix 2>/dev/null
@@ -119,6 +121,7 @@ function zabbix_Install(){
     #创建外部脚本目录
     #mkdir /data/local/zabbix/scripts
 }
+
 function nginx_php(){
     PHP_conf_file="/data/local/zabbix/etc/zabbix_agentd.conf.d/php.conf"
     NGX_conf_file="/data/local/zabbix/etc/zabbix_agentd.conf.d/nginx.conf"
