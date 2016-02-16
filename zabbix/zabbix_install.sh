@@ -228,7 +228,7 @@ tn.write('quit\n')
 tm =  tn.read_all()
 print tm
 eof
-        echo "UserParameter=memcached.status[*],/data/local/zabbix/scripts/memcache.py  | grep '\$1' | awk '{print \$\$3}'" > $PHP_conf_file
+        echo "UserParameter=memcached.status[*],/data/local/zabbix/scripts/memcache.py  | grep '\$1' | awk '{print \$\$3}'" > $Memcached_conf_file
         /etc/init.d/zabbix_agentd restart
     fi
 
@@ -246,7 +246,7 @@ function Main(){
 	fi
     #防止链接失效,以后修改脚本到处找变量  麻烦
     Zabbix_package="http://netix.dl.sourceforge.net/project/zabbix/ZABBIX%20Latest%20Stable/2.2.11/zabbix-2.2.11.tar.gz"
-    Server_host_ip=10.10.11.51
+    Server_host_ip=192.168.1.3
     zabbix_Install agent
     nginx_php
 }
