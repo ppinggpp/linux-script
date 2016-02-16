@@ -112,7 +112,7 @@ function main(){
 
     else
     	echo -e "\033[1;32m Setup rsync \033[0m"
-    	Install_Rsync
+    	install_Rsync
     	echo -e "\033[1;32m Create config file \033[0m"
     	create_Rsync_Conf
         create_Rsyncd_Command
