@@ -331,6 +331,7 @@ function install_PHP(){
 	--enable-inline-optimization --disable-debug \
 	--disable-rpath --enable-shared --enable-opcache \
 	--enable-fpm \
+    --with-zlib \
 	--with-fpm-user=www \
 	--with-fpm-group=www \
 	--with-mysql --with-mysqli --with-pdo-mysql=mysqlnd \
