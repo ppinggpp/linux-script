@@ -10,14 +10,14 @@ function format_Disk() {
         DiskSize=`fdisk -l "${UnusedDisk}" | grep -i "cylinders$" | awk '{print $5}'`
         echo -ne "#!/bin/bash\nfdisk ${UnusedDisk} << EOF > /dev/null 2>&1\n"> /tmp/mount2disk_arg.sh
         echo -ne "n\np\n1\n\n\n\n\nw\nq\nEOF\n" >> /tmp/mount2disk_arg.sh
-        EchoGreen "The System Beginning Format Disk ${UnusedDisk}"
+        echo "The System Beginning Format Disk ${UnusedDisk}"
         chmod u+x /tmp/mount2disk_arg.sh && /tmp/mount2disk_arg.sh > /dev/null 2>&1
         sleep 1
         mkfs.ext4 ${UnusedDisk}1 >/dev/null 2>&1
         mount ${UnusedDisk}1 /data && echo -ne "${UnusedDisk}1 /data     ext4    defaults,acl     0 0" >> /etc/fstab
         mount -o remount,rw /data >/dev/null 2>&1
         rm -f /tmp/mount2disk_arg.sh
-        EchoGreen "The System Format Disk ${UnusedDisk} Successed,it is mounted to /data"
+        echo "The System Format Disk ${UnusedDisk} Successed,it is mounted to /data"
     fi
 }
 
